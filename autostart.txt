@@ -1,0 +1,8 @@
+# crontab autostart
+@reboot cd ipset ; ./ipset-start.sh
+
+# /etc/rc.local autostart
+cd ipset ; ./ipset-start.sh
+
+# crontab update list
+0 * * * *  cd ipset ; ./ipset-update-list.sh
