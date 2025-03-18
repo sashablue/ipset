@@ -2,5 +2,5 @@
 IPSETCONF=~/ipset/ipset.conf
 curl -s https://raw.githubusercontent.com/sashablue/ipset/refs/heads/master/ipset.conf -o $IPSETCONF
 ipset -exist -file $IPSETCONF restore
-iptables -I INPUT -m set --match-set blocklist src -j DROP
-iptables -I FORWARD -m set --match-set blocklist src -j DROP
+iptables -nvL INPUT | grep "match-set blocklist src" || iptables -I INPUT -m set --match-set blocklist src -j DROP
+iptables -nvL FORWARD | grep "match-set blocklist src" || iptables -I FORWARD -m set --match-set blocklist src -j DROP
